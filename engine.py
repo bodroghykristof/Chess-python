@@ -73,6 +73,7 @@ def piece_blocks_the_way(row, column, piece, board):
 def move_piece(piece, row, column):
     piece.row = row
     piece.column = column
+    piece.moves += 1
     return piece
 
 
