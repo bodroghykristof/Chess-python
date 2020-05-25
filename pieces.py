@@ -26,7 +26,7 @@ class Bishop(Piece):
         return False
 
     def valid_hit(self, start_row, start_col, end_row, end_col):
-        if self.valid_move(self, start_row, start_col, end_row, end_col) is True:
+        if self.valid_move(start_row, start_col, end_row, end_col) is True:
             return True
         return False
 
@@ -42,7 +42,7 @@ class Horse(Piece):
         return False
 
     def valid_hit(self, start_row, start_col, end_row, end_col):
-        if self.valid_move(self, start_row, start_col, end_row, end_col) is True:
+        if self.valid_move(start_row, start_col, end_row, end_col) is True:
             return True
         return False
 
@@ -58,7 +58,7 @@ class Rook(Piece):
         return False
 
     def valid_hit(self, start_row, start_col, end_row, end_col):
-        if self.valid_move(self, start_row, start_col, end_row, end_col) is True:
+        if self.valid_move(start_row, start_col, end_row, end_col) is True:
             return True
         return False
 
@@ -76,7 +76,7 @@ class Queen(Piece):
         return False
 
     def valid_hit(self, start_row, start_col, end_row, end_col):
-        if self.valid_move(self, start_row, start_col, end_row, end_col) is True:
+        if self.valid_move(start_row, start_col, end_row, end_col) is True:
             return True
         return False
 
@@ -92,7 +92,7 @@ class King(Piece):
         return False
 
     def valid_hit(self, start_row, start_col, end_row, end_col):
-        if self.valid_move(self, start_row, start_col, end_row, end_col) is True:
+        if self.valid_move(start_row, start_col, end_row, end_col) is True:
             return True
         return False
 

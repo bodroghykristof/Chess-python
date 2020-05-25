@@ -29,6 +29,18 @@ def own_cell(row, column, color, board):
     return False
 
 
+def empty_cell(row, column, board):
+    if any(piece.position == (row, column) for piece in board.pieces_list):
+        return False
+    return True
+
+
+def opponent_cell(row, column, color, board):
+    if any(piece.position == (row, column) for piece in board.pieces_list if not piece.color == color):
+        return True
+    return False
+
+
 def get_piece_by_coordinates(position_string, game_board):
     row, column = convert_string_to_indeces(position_string)
     for piece in game_board.pieces_list:
@@ -48,8 +60,10 @@ def choose_destination(game_board, piece, color):
         position_string = input("Please make your move!")
         if check_general_correct(game_board.size, position_string) is True:
             end_row, end_column = convert_string_to_indeces(position_string)
-            if piece.valid_move(piece.row, piece.column, end_row, end_column) is True and not own_cell(end_row, end_column, color, game_board):
-                if isinstance(piece, Horse) or not piece_blocks_the_way(end_row, end_column, piece, game_board):
+            if isinstance(piece, Horse) or not piece_blocks_the_way(end_row, end_column, piece, game_board):
+                if piece.valid_move(piece.row, piece.column, end_row, end_column) is True and empty_cell(end_row, end_column, game_board):
+                    correct_input = True
+                elif piece.valid_hit(piece.row, piece.column, end_row, end_column) is True and opponent_cell(end_row, end_column, color, game_board):
                     correct_input = True
     return end_row, end_column
 
