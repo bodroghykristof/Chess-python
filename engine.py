@@ -77,10 +77,11 @@ def piece_blocks_the_way(row, column, piece, board):
         return True
     else:
         column_index = piece.column + col_difference
-        for row_index in range(piece.row + row_difference, row, row_difference):
-            if any(other_piece.position == (row_index, column_index) for other_piece in board.pieces_list):
-                return True
-            column_index = column_index + col_difference
+        if row_difference != 0:
+            for row_index in range(piece.row + row_difference, row, row_difference):
+                if any(other_piece.position == (row_index, column_index) for other_piece in board.pieces_list):
+                    return True
+                column_index = column_index + col_difference
     return False
 
 
