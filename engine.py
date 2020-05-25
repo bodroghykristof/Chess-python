@@ -71,17 +71,18 @@ def choose_destination(game_board, piece, color):
 def piece_blocks_the_way(row, column, piece, board):
     col_difference = numpy.sign(column - piece.column)
     row_difference = numpy.sign(row - piece.row)
-    if piece.row == row and any(other_piece.column in range(piece.column + col_difference, column, col_difference) and other_piece.row == row for other_piece in board.pieces_list):
-        return True
-    elif piece.column == column and any(other_piece.row in range(piece.row + row_difference, row, row_difference) and other_piece.column == column for other_piece in board.pieces_list):
-        return True
-    else:
+    if row_difference == 0 and col_difference != 0:
+        if piece.row == row and any(other_piece.column in range(piece.column + col_difference, column, col_difference) and other_piece.row == row for other_piece in board.pieces_list):
+            return True
+    elif row_difference != 0 and col_difference == 0:
+        if piece.column == column and any(other_piece.row in range(piece.row + row_difference, row, row_difference) and other_piece.column == column for other_piece in board.pieces_list):
+            return True
+    elif row_difference != 0 and col_difference != 0:
         column_index = piece.column + col_difference
-        if row_difference != 0:
-            for row_index in range(piece.row + row_difference, row, row_difference):
-                if any(other_piece.position == (row_index, column_index) for other_piece in board.pieces_list):
-                    return True
-                column_index = column_index + col_difference
+        for row_index in range(piece.row + row_difference, row, row_difference):
+            if any(other_piece.position == (row_index, column_index) for other_piece in board.pieces_list):
+                return True
+            column_index = column_index + col_difference
     return False
 
 
@@ -109,8 +110,10 @@ def check_pawn_finished():
 
 def check_check(game_board, color):
     king = opponent_king(game_board, color)
-    if any(piece.valid_hit(piece.row, piece.column, king.row, king.column) is True for piece in game_board.pieces_list if piece.color == color):
-        return True
+    for piece in game_board.pieces_list:
+        if isinstance(piece, Horse) or not piece_blocks_the_way(king.row, king.column, piece, game_board):
+            if piece.valid_hit(piece.row, piece.column, king.row, king.column) and piece.color == color:
+                return True
     return False
 
 
