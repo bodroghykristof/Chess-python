@@ -107,9 +107,9 @@ def check_pawn_finished():
     pass
 
 
-def check_check(game_board, color, row, column, piece):
+def check_check(game_board, color):
     king = opponent_king(game_board, color)
-    if piece.valid_hit(row, column, king.row, king.column):
+    if any(piece.valid_hit(piece.row, piece.column, king.row, king.column) is True for piece in game_board.pieces_list if piece.color == color):
         return True
     return False
 
