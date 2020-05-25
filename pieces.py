@@ -3,6 +3,7 @@ class Piece:
         self.row = row
         self.column = column
         self.color = color
+        self.moves = 0
 
     @property
     def position(self):
@@ -77,10 +78,16 @@ class Pawn(Piece):
         super().__init__(row, column, color)
 
     def valid_move(self, start_row, start_col, end_row, end_col):
-        if end_row - start_row == -1 and self.color == "White":
-            return True
-        elif end_row - start_row == 1 and self.color == "Black":
-            return True
+        if self.color == "White":
+            if self.moves == 0 and end_row - start_row in (-1, -2):
+                return True
+            elif end_row - start_row == -1:
+                return True
+        else:
+            if self.moves == 0 and end_row - start_row in (1, 2):
+                return True
+            elif end_row - start_row == 1:
+                return True
         return False
 
 
