@@ -106,7 +106,7 @@ def check_pawn_finished():
     pass
 
 
-def check_check():
+def check_check(game_board, row, column, piece):
     pass
 
 

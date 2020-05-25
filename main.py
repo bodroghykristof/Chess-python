@@ -24,7 +24,7 @@ def main():
         engine.check_hit(game_board, row, column, piece)
         engine.check_castling()
         engine.check_pawn_finished()
-        engine.check_check()
+        engine.check_check(game_board, row, column, piece)
         engine.check_is_win()
         color = engine.switch_color(color)
         os.system('clear')
