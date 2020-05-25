@@ -3,6 +3,7 @@ class Piece:
         self.row = row
         self.column = column
         self.color = color
+        self.moves = []
 
     @property
     def position(self):
