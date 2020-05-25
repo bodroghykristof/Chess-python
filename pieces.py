@@ -25,6 +25,11 @@ class Bishop(Piece):
             return True
         return False
 
+    def valid_hit(self, start_row, start_col, end_row, end_col):
+        if self.valid_move(start_row, start_col, end_row, end_col) is True:
+            return True
+        return False
+
 
 class Horse(Piece):
     def __init__(self, row, column, color):
@@ -36,6 +41,11 @@ class Horse(Piece):
             return True
         return False
 
+    def valid_hit(self, start_row, start_col, end_row, end_col):
+        if self.valid_move(start_row, start_col, end_row, end_col) is True:
+            return True
+        return False
+
 
 class Rook(Piece):
     def __init__(self, row, column, color):
@@ -44,6 +54,11 @@ class Rook(Piece):
 
     def valid_move(self, start_row, start_col, end_row, end_col):
         if abs(start_row - end_row) == abs(start_col - end_col):
+            return True
+        return False
+
+    def valid_hit(self, start_row, start_col, end_row, end_col):
+        if self.valid_move(start_row, start_col, end_row, end_col) is True:
             return True
         return False
 
@@ -60,6 +75,11 @@ class Queen(Piece):
             return True
         return False
 
+    def valid_hit(self, start_row, start_col, end_row, end_col):
+        if self.valid_move(start_row, start_col, end_row, end_col) is True:
+            return True
+        return False
+
 
 class King(Piece):
     def __init__(self, row, column, color):
@@ -68,6 +88,11 @@ class King(Piece):
 
     def valid_move(self, start_row, start_col, end_row, end_col):
         if sorted([abs(start_row - end_row), abs(start_col - end_col)]) in ([0, 1], [1, 1]):
+            return True
+        return False
+
+    def valid_hit(self, start_row, start_col, end_row, end_col):
+        if self.valid_move(start_row, start_col, end_row, end_col) is True:
             return True
         return False
 
@@ -88,6 +113,13 @@ class Pawn(Piece):
                 return True
             elif end_row - start_row == 1:
                 return True
+        return False
+
+    def valid_hit(self, start_row, start_col, end_row, end_col):
+        if self.color == "White" and end_row - start_row == -1 and abs(end_col - start_col) == 1:
+            return True
+        elif self.color == "Black" and end_row - start_row == 1 and abs(end_col - start_col) == 1:
+            return True
         return False
 
 
